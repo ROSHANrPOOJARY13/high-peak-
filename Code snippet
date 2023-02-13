@@ -1,0 +1,26 @@
+def maximumEarnings(n, jobs):
+    jobs.sort(key=lambda x: x[2], reverse=True)
+    tasks = n
+    time = 0
+    h_earnings = 0
+    total_earnings = 0
+    for job in jobs:
+        if job[0] >= time:
+            time = job[1]
+            tasks -= 1
+            h_earnings += job[2]
+        total_earnings += job[2]
+    total_earnings = total_earnings - h_earnings
+    return tasks, total_earnings
+
+print("Enter the number of Jobs")
+n = int(input().strip())
+jobs = []
+print("Enter job start time, end time, and earnings")
+for i in range(n):
+    start, end, earning = [int(e) for e in input().strip().split()]
+    jobs.append([start, end, earning])
+result = maximumEarnings(n, jobs)
+print("The number of tasks and earnings available for others")
+print("Task: " + str(result[0]))
+print("Earnings: " + str(result[1]))
